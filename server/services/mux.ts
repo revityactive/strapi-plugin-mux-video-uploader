@@ -50,6 +50,9 @@ export default ({ strapi }: { strapi: any }) => ({
     const config = await Config.getConfig('general');
 
     const body = { "input": url, "playback_policy": ["public"] };
+    if(config.support_mp4) {
+      body.mp4_support = "standard";
+    }
 
     const result = await axios('https://api.mux.com/video/v1/assets', {
       method: "post",
